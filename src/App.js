@@ -1,6 +1,8 @@
+import React from "react";
 import { useState } from "react";
 import Header from "./components/Header";
 import Tasks from "./components/Tasks";
+import "./App.css";
 
 const App = () => {
   const [tasksData, setTasksData] = useState([
@@ -25,8 +27,9 @@ const App = () => {
   ]);
 
   return (
-    <div>
-      <Header title="Hi" />
+    <div className="container main">
+      <Header title="CK" />
+      <hr />
       <Tasks tasks={tasksData} />
     </div>
   );
