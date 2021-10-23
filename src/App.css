@@ -1,6 +1,8 @@
 @import "~antd/dist/antd.css";
+@import url("https://fonts.googleapis.com/css2?family=Arimo&display=swap");
 
 .main {
+  font-family: "Arimo", sans-serif;
   margin: 100px auto;
   width: 50%;
   border: 2px solid #e39520;
@@ -28,4 +30,8 @@ header > h1 {
 
 .task-box:hover {
   background-color: #ffe0c7;
+}
+
+.reminder {
+    border-bottom: 5px solid #0eb100;
 }

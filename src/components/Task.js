@@ -2,9 +2,9 @@ import { FaTimes } from "react-icons/fa";
 import { FaEdit } from "react-icons/fa";
 import { CalendarOutlined } from "@ant-design/icons";
 
-const Task = ({ task }) => {
+const Task = ({ task, onDeleteTask, onToggleTask }) => {
   return (
-    <div className="task-box">
+    <div className={`task-box ${task.reminder ? "reminder" : ""}`} onClick={() => onToggleTask(task.id)}>
       <div className="task-data">
         <h3>{task.text}</h3>
         <p>
@@ -13,7 +13,7 @@ const Task = ({ task }) => {
       </div>
       <div className="task-btn">
         <FaEdit style={editStyle} />
-        <FaTimes style={timeStyle} />
+        <FaTimes style={timeStyle} onClick={() => onDeleteTask(task.id)} />
       </div>
     </div>
   );

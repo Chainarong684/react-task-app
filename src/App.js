@@ -22,15 +22,23 @@ const App = () => {
       id: 3,
       text: "Workout",
       day: "07/03/2021",
-      reminder: true,
+      reminder: false,
     },
   ]);
+
+  const deleteTask = (id) => {
+    setTasksData(tasksData.filter((task) => task.id !== id));
+  };
+
+  const toggleTask = (id) => {
+    setTasksData(tasksData.map((task) => task.id === id ? { ...task, reminder: !task.reminder } : task))
+  };
 
   return (
     <div className="container main">
       <Header title="CK" />
       <hr />
-      <Tasks tasks={tasksData} />
+      {tasksData.length > 0 ? <Tasks tasks={tasksData} onDeleteTask={deleteTask} onToggleTask={toggleTask} /> : "Empty"}
     </div>
   );
 };
