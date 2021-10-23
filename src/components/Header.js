@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import ButtonCustom from "./ButtonCustom";
-import { CalendarOutlined } from "@ant-design/icons";
+import { ProfileOutlined } from "@ant-design/icons";
 
 const Header = ({ title }) => {
   const onClick = () => {
@@ -10,7 +10,7 @@ const Header = ({ title }) => {
   return (
     <header>
       <h1>
-        <CalendarOutlined /> {title} Task list
+        <ProfileOutlined /> {title} Task list
       </h1>
       <ButtonCustom func={onClick} />
     </header>
