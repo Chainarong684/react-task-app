@@ -31,7 +31,7 @@ const App = () => {
   };
 
   const toggleTask = (id) => {
-    setTasksData(tasksData.map((task) => task.id === id ? { ...task, reminder: !task.reminder } : task))
+    setTasksData(tasksData.map((task) => (task.id === id ? { ...task, reminder: !task.reminder } : task)));
   };
 
   return (

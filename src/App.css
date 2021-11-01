@@ -32,6 +32,6 @@ header > h1 {
   background-color: #ffe0c7;
 }
 
-.reminder {
+.task-box.reminder {
     border-bottom: 5px solid #0eb100;
 }

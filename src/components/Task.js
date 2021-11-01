@@ -4,7 +4,7 @@ import { CalendarOutlined } from "@ant-design/icons";
 
 const Task = ({ task, onDeleteTask, onToggleTask }) => {
   return (
-    <div className={`task-box ${task.reminder ? "reminder" : ""}`} onClick={() => onToggleTask(task.id)}>
+    <div className={`task-box ${task.reminder ? "reminder" : ""}`} onDoubleClick={() => onToggleTask(task.id)}>
       <div className="task-data">
         <h3>{task.text}</h3>
         <p>
