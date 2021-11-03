@@ -2,6 +2,8 @@ import React from "react";
 import { useState } from "react";
 import Header from "./components/Header";
 import Tasks from "./components/Tasks";
+import AddTask from "./components/AddTask";
+
 import "./App.css";
 
 const App = () => {
@@ -26,6 +28,14 @@ const App = () => {
     },
   ]);
 
+  const addTask = (task) => {
+    console.log(task);
+    const id = Math.floor(Math.random() * 10000);
+    const newTask = { id, ...task };
+    console.log(newTask);
+    setTasksData(...tasksData, newTask);
+  };
+
   const deleteTask = (id) => {
     setTasksData(tasksData.filter((task) => task.id !== id));
   };
@@ -37,6 +47,7 @@ const App = () => {
   return (
     <div className="container main">
       <Header title="CK" />
+      <AddTask onAddTask={addTask} />
       <hr />
       {tasksData.length > 0 ? <Tasks tasks={tasksData} onDeleteTask={deleteTask} onToggleTask={toggleTask} /> : "Empty"}
     </div>
