@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Form, Input, Button, Checkbox } from "antd";
 
 const AddTask = ({ onAddTask }) => {
@@ -22,11 +22,11 @@ const AddTask = ({ onAddTask }) => {
       autoComplete="off"
       onFinish={() => handleFormData()}
     >
-      <Form.Item label="Task name" name="task" rules={[{ required: false, message: "Please input task name !" }]}>
+      <Form.Item label="Task name" name="task" rules={[{ required: true, message: "Please input task name !" }]}>
         <Input placeholder="Task name" value={text} onChange={(e) => setText(e.target.value)} />
       </Form.Item>
 
-      <Form.Item label="Day" name="day" rules={[{ required: false, message: "Please input day !" }]}>
+      <Form.Item label="Day" name="day" rules={[{ required: true, message: "Please input day !" }]}>
         <Input placeholder="Day" value={day} onChange={(e) => setDay(e.target.value)} />
       </Form.Item>
 
