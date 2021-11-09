@@ -6,11 +6,14 @@ const AddTask = ({ onAddTask }) => {
   const [day, setDay] = useState("");
   const [reminder, setReminder] = useState(false);
 
-  const handleFormData = () => {
-    onAddTask({ text, day, reminder });
-    // setTask("");
-    // setDate("");
-    // setReminder(false);
+  const handleSubmitForm = () => {
+    const id = Math.floor(Math.random() * 10000);
+    const newTask = { id, text, day, reminder };
+    onAddTask(newTask);
+
+    setText("");
+    setDay("");
+    setReminder(false);
   };
 
   return (
@@ -18,9 +21,9 @@ const AddTask = ({ onAddTask }) => {
       name="add-form"
       labelCol={{ span: 4 }}
       wrapperCol={{ span: 16 }}
-      initialValues={{ reminder: false }}
       autoComplete="off"
-      onFinish={() => handleFormData()}
+      scrollToFirstError
+      onFinish={handleSubmitForm}
     >
       <Form.Item label="Task name" name="task" rules={[{ required: true, message: "Please input task name !" }]}>
         <Input placeholder="Task name" value={text} onChange={(e) => setText(e.target.value)} />

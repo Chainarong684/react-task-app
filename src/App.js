@@ -6,7 +6,7 @@ import AddTask from "./components/AddTask";
 import "./App.css";
 
 const App = () => {
-  const [tasksData, setTasksData] = useState([
+  let sampleData = [
     {
       id: 1,
       text: "Coder",
@@ -25,12 +25,11 @@ const App = () => {
       day: "07/03/2021",
       reminder: false,
     },
-  ]);
+  ];
+  const [tasksData, setTasksData] = useState(sampleData);
 
   const addTask = (task) => {
-    const id = Math.floor(Math.random() * 10000);
-    const newTask = { id, ...task };
-    setTasksData(...tasksData, newTask);
+    setTasksData([...tasksData, task]);
   };
 
   const deleteTask = (id) => {
