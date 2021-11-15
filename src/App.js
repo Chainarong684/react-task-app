@@ -43,7 +43,7 @@ const App = () => {
 
   return (
     <div className="container main">
-      <Header title="Chainarong" onToggleBtn={() => setShowAddTask(!showAddTask)}/>
+      <Header title="Chainarong" onToggleBtn={() => setShowAddTask(!showAddTask)} isToggled={showAddTask} />
       {showAddTask && <AddTask onAddTask={addTask} />}
       <hr />
       {tasksData.length > 0 ? <Tasks tasks={tasksData} onDeleteTask={deleteTask} onToggleTask={toggleTask} /> : "Empty"}

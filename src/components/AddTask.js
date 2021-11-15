@@ -24,6 +24,7 @@ const AddTask = ({ onAddTask }) => {
       autoComplete="off"
       scrollToFirstError
       onFinish={handleSubmitForm}
+      style={{ marginTop: 50 }}
     >
       <Form.Item label="Task name" name="task" rules={[{ required: true, message: "Please input task name !" }]}>
         <Input placeholder="Task name" value={text} onChange={(e) => setText(e.target.value)} />
