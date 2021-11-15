@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Form, Input, Button, Checkbox } from "antd";
 
 const AddTask = ({ onAddTask }) => {
-  const [text, setText] = useState("");
-  const [day, setDay] = useState("");
+  const [text, setText] = useState("Test");
+  const [day, setDay] = useState("11/11/2021");
   const [reminder, setReminder] = useState(false);
 
   const handleSubmitForm = () => {
@@ -21,6 +21,11 @@ const AddTask = ({ onAddTask }) => {
       name="add-form"
       labelCol={{ span: 4 }}
       wrapperCol={{ span: 16 }}
+      initialValues={{
+        task: text,
+        day: day,
+        reminder: reminder,
+      }}
       autoComplete="off"
       scrollToFirstError
       onFinish={handleSubmitForm}
