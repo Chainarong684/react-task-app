@@ -27,6 +27,7 @@ const App = () => {
     },
   ];
   const [tasksData, setTasksData] = useState(sampleData);
+  const [showAddTask, setShowAddTask] = useState(false);
 
   const addTask = (task) => {
     setTasksData([...tasksData, task]);
@@ -42,8 +43,8 @@ const App = () => {
 
   return (
     <div className="container main">
-      <Header title="CK" />
-      <AddTask onAddTask={addTask} />
+      <Header title="Chainarong" onToggleBtn={() => setShowAddTask(!showAddTask)}/>
+      {showAddTask && <AddTask onAddTask={addTask} />}
       <hr />
       {tasksData.length > 0 ? <Tasks tasks={tasksData} onDeleteTask={deleteTask} onToggleTask={toggleTask} /> : "Empty"}
     </div>

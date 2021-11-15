@@ -1,18 +1,17 @@
 import PropTypes from "prop-types";
-import ButtonCustom from "./ButtonCustom";
 import { ProfileOutlined } from "@ant-design/icons";
+import { Button } from "antd";
+import { PlusCircleOutlined } from "@ant-design/icons";
 
-const Header = ({ title }) => {
-  const onClick = () => {
-    console.log("gg");
-  };
-
+const Header = ({ title, onToggleBtn }) => {
   return (
     <header>
       <h1>
         <ProfileOutlined /> {title} Task list
       </h1>
-      <ButtonCustom func={onClick} />
+      <Button type="primary" onClick={onToggleBtn}>
+        <PlusCircleOutlined /> Add
+      </Button>
     </header>
   );
 };
