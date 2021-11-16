@@ -10,7 +10,7 @@ const Header = ({ title, onToggleBtn, isToggled }) => {
   return (
     <div className="header-box">
       <h1>
-        <ProfileOutlined /> {title} Task list
+        <ProfileOutlined /> {title} Tasks list
       </h1>
       {location.pathname === "/about" ? (
         <Button type="primary" style={customButton} onClick={onToggleBtn}>
