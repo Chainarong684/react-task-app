@@ -1,15 +1,22 @@
 import PropTypes from "prop-types";
 import { ProfileOutlined } from "@ant-design/icons";
 import { Button } from "antd";
-import { PlusCircleOutlined, MinusCircleOutlined } from "@ant-design/icons";
+import { PlusCircleOutlined, MinusCircleOutlined, BarsOutlined } from "@ant-design/icons";
+import { useLocation } from "react-router";
 
 const Header = ({ title, onToggleBtn, isToggled }) => {
+  const location = useLocation();
+
   return (
-    <header>
+    <div className="header-box">
       <h1>
         <ProfileOutlined /> {title} Task list
       </h1>
-      {isToggled ? (
+      {location.pathname === "/about" ? (
+        <Button type="primary" style={customButton} onClick={onToggleBtn}>
+          <BarsOutlined /> Home
+        </Button>
+      ) : isToggled ? (
         <Button type="dash" danger onClick={onToggleBtn}>
           <MinusCircleOutlined /> Cancel
         </Button>
@@ -18,7 +25,7 @@ const Header = ({ title, onToggleBtn, isToggled }) => {
           <PlusCircleOutlined /> Add
         </Button>
       )}
-    </header>
+    </div>
   );
 };
 
@@ -30,9 +37,10 @@ Header.propTypes = {
   title: PropTypes.string.isRequired,
 };
 
-// const headerStyle = {
-//     color: 'red',
-//     backgroundColor: 'black'
-// }
+const customButton = {
+  color: '#000000',
+  backgroundColor: "#e39520",
+  borderColor: "#e39520",
+};
 
 export default Header;
