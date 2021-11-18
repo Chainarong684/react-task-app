@@ -1,10 +1,9 @@
 let TasksDB = require("../models/TasksModel");
 
 // get all tasks
-const fetchAllTasks = (req, res) => {
-  req.res.json({
-    status: "good",
-  });
+const fetchAllTasks = async (req, res) => {
+  const data = await TasksDB.find();
+  console.log(data);
 };
 
 const addTasks = async (req, res) => {
