@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const taskSchema = new Schema({
-  name: String,
+  name: {type: String, trim: true, required: true},
   detail: String,
   date: { type: Date, default: Date.now },
   reminder: Boolean,

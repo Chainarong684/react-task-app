@@ -12,6 +12,9 @@ app.listen(PORT, () => {
   console.log(`Server is running at port ${PORT}`);
 });
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 mongoDB.connectDB();
 
 app.use("/", router);
