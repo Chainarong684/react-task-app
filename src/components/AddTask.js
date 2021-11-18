@@ -3,15 +3,17 @@ import { Form, Input, Button, Checkbox } from "antd";
 
 const AddTask = ({ onAddTask }) => {
   const [text, setText] = useState("");
+  const [detail, setDetail] = useState("");
   const [day, setDay] = useState("");
   const [reminder, setReminder] = useState(false);
 
   const handleSubmitForm = () => {
     const id = Math.floor(Math.random() * 10000);
-    const newTask = { id, text, day, reminder };
+    const newTask = { id, text, detail, day, reminder };
     onAddTask(newTask);
 
     setText("");
+    setDetail("");
     setDay("");
     setReminder(false);
   };
@@ -33,6 +35,10 @@ const AddTask = ({ onAddTask }) => {
     >
       <Form.Item label="Task name" name="task" rules={[{ required: true, message: "Please input task name !" }]}>
         <Input placeholder="Task name" value={text} onChange={(e) => setText(e.target.value)} />
+      </Form.Item>
+
+      <Form.Item label="Description" name="detail" rules={[{ required: false, message: "Please input some detail" }]}>
+        <Input placeholder="Description" value={detail} onChange={(e) => setDetail(e.target.value)} />
       </Form.Item>
 
       <Form.Item label="Day" name="day" rules={[{ required: true, message: "Please input day !" }]}>

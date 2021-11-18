@@ -10,6 +10,12 @@ const Task = ({ task, onDeleteTask, onToggleTask }) => {
         <p>
           <CalendarOutlined /> {task.day}
         </p>
+        {task.detail && (
+          <>
+            <hr />
+            {task.detail}
+          </>
+        )}
       </div>
       <div className="task-btn">
         <FaEdit style={editStyle} />
