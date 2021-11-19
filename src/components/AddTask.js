@@ -2,19 +2,18 @@ import { useState } from "react";
 import { Form, Input, Button, Checkbox } from "antd";
 
 const AddTask = ({ onAddTask }) => {
-  const [text, setText] = useState("");
+  const [name, setName] = useState("");
   const [detail, setDetail] = useState("");
-  const [day, setDay] = useState("");
+  const [date, setDate] = useState("");
   const [reminder, setReminder] = useState(false);
 
   const handleSubmitForm = () => {
-    const id = Math.floor(Math.random() * 10000);
-    const newTask = { id, text, detail, day, reminder };
+    const newTask = { name, detail, date, reminder };
     onAddTask(newTask);
 
-    setText("");
-    setDetail("");
-    setDay("");
+    setName(null);
+    setDetail(null);
+    setDate(null);
     setReminder(false);
   };
 
@@ -24,8 +23,8 @@ const AddTask = ({ onAddTask }) => {
       labelCol={{ span: 4 }}
       wrapperCol={{ span: 16 }}
       initialValues={{
-        task: text,
-        day: day,
+        task: name,
+        date: date,
         reminder: reminder,
       }}
       autoComplete="off"
@@ -34,15 +33,15 @@ const AddTask = ({ onAddTask }) => {
       style={{ marginTop: 50 }}
     >
       <Form.Item label="Task name" name="task" rules={[{ required: true, message: "Please input task name !" }]}>
-        <Input placeholder="Task name" value={text} onChange={(e) => setText(e.target.value)} />
+        <Input placeholder="Task name" value={name} onChange={(e) => setName(e.target.value)} />
       </Form.Item>
 
       <Form.Item label="Description" name="detail" rules={[{ required: false, message: "Please input some detail" }]}>
         <Input placeholder="Description" value={detail} onChange={(e) => setDetail(e.target.value)} />
       </Form.Item>
 
-      <Form.Item label="Day" name="day" rules={[{ required: true, message: "Please input day !" }]}>
-        <Input placeholder="Day" value={day} onChange={(e) => setDay(e.target.value)} />
+      <Form.Item label="date" name="date" rules={[{ required: true, message: "Please input date !" }]}>
+        <Input placeholder="date" value={date} onChange={(e) => setDate(e.target.value)} />
       </Form.Item>
 
       <Form.Item name="reminder" valuePropName="checked" wrapperCol={{ offset: 10, span: 16 }}>

@@ -4,11 +4,11 @@ import { CalendarOutlined } from "@ant-design/icons";
 
 const Task = ({ task, onDeleteTask, onToggleTask }) => {
   return (
-    <div className={`task-box ${task.reminder ? "reminder" : ""}`} onDoubleClick={() => onToggleTask(task.id)}>
+    <div className={`task-box ${task.reminder ? "reminder" : ""}`} onDoubleClick={() => onToggleTask(task._id)}>
       <div className="task-data">
-        <h3>{task.text}</h3>
+        <h3>{task.name}</h3>
         <p>
-          <CalendarOutlined /> {task.day}
+          <CalendarOutlined /> {task.date}
         </p>
         {task.detail && (
           <>
@@ -19,7 +19,7 @@ const Task = ({ task, onDeleteTask, onToggleTask }) => {
       </div>
       <div className="task-btn">
         <FaEdit style={editStyle} />
-        <FaTimes style={timeStyle} onClick={() => onDeleteTask(task.id)} />
+        <FaTimes style={timeStyle} onClick={() => onDeleteTask(task._id)} />
       </div>
     </div>
   );
