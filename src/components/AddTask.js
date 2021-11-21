@@ -4,16 +4,16 @@ import { Form, Input, Button, Checkbox } from "antd";
 const AddTask = ({ onAddTask }) => {
   const [name, setName] = useState("");
   const [detail, setDetail] = useState("");
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState(Date.now());
   const [reminder, setReminder] = useState(false);
 
   const handleSubmitForm = () => {
     const newTask = { name, detail, date, reminder };
     onAddTask(newTask);
 
-    setName(null);
-    setDetail(null);
-    setDate(null);
+    setName("");
+    setDetail("");
+    setDate(Date.now());
     setReminder(false);
   };
 
@@ -40,8 +40,8 @@ const AddTask = ({ onAddTask }) => {
         <Input placeholder="Description" value={detail} onChange={(e) => setDetail(e.target.value)} />
       </Form.Item>
 
-      <Form.Item label="date" name="date" rules={[{ required: true, message: "Please input date !" }]}>
-        <Input placeholder="date" value={date} onChange={(e) => setDate(e.target.value)} />
+      <Form.Item label="date" name="date" rules={[{ required: false, message: "Please input date !" }]}>
+        <Input type="date" placeholder="date" value={date} onChange={(e) => setDate(e.target.value)} />
       </Form.Item>
 
       <Form.Item name="reminder" valuePropName="checked" wrapperCol={{ offset: 10, span: 16 }}>

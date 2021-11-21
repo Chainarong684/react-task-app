@@ -5,58 +5,24 @@ import AddTask from "../components/AddTask";
 import Tasks from "../components/Tasks";
 import Footer from "../Layouts/Footer";
 
-import axios from "axios";
-import { Result } from "antd";
+import { fetchAllTasks, createTask } from "../services/serverServices";
 
 const Home = () => {
-  // let sampleData = [
-  //   {
-  //     id: 1,
-  //     text: "Coder",
-  //     day: "02/03/2021",
-  //     detail:
-  //       "Rerum quam non nulla dolorum eos reprehenderit amet eveniet. Sunt ut rerum qui ipsum praesentium. In quis distinctio hic dolores iure.",
-  //     reminder: true,
-  //   },
-  //   {
-  //     id: 2,
-  //     text: "Reader",
-  //     day: "05/03/2021",
-  //     detail: `Voluptatem a eos sed eligendi itaque tempore enim et eos. Nulla reprehenderit omnis placeat veniam quos omnis aspernatur nulla ab. Omnis a culpa velit ducimus.
-  //             Optio omnis voluptas soluta magni tenetur in. Qui nesciunt nostrum facilis velit odio explicabo distinctio eligendi. Molestiae fuga omnis.
-  //             Voluptas laborum sed in quisquam. Mollitia temporibus itaque provident ut omnis tenetur sint consequatur. Mollitia magni excepturi reiciendis reiciendis ut. Aut quo nemo et. Aperiam voluptatem mollitia. Perferendis et repellat sed pariatur non maiores reiciendis ut.`,
-  //     reminder: true,
-  //   },
-  //   {
-  //     id: 3,
-  //     text: "Workout",
-  //     day: "07/03/2021",
-  //     detail:
-  //       "Sint qui unde tempora id iure. Non optio incidunt quo. Qui necessitatibus eos est animi assumenda corporis aut illo ipsa.",
-  //     reminder: false,
-  //   },
-  // ];
   const [tasksData, setTasksData] = useState([]);
   const [showAddTask, setShowAddTask] = useState(false);
 
   useEffect(() => {
-    fetchAllTasks();
+    getTasks();
   }, []);
 
-  const fetchAllTasks = () => {
-    axios
-      .get("http://localhost:3001/api/v1/tasks")
-      .then((result) => {
-        const { data } = result.data
-        setTasksData(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const getTasks = async () => {
+    const result = await fetchAllTasks();
+    setTasksData(result);
   };
 
-  const addTask = (task) => {
-    setTasksData([...tasksData, task]);
+  const addTask = async (task) => {
+    const newTask = await createTask(task);
+    setTasksData([...tasksData, newTask]);
   };
 
   const deleteTask = (id) => {
@@ -72,11 +38,7 @@ const Home = () => {
       <Header title="Chainarong" onToggleBtn={() => setShowAddTask(!showAddTask)} isToggled={showAddTask} />
       {showAddTask && <AddTask onAddTask={addTask} />}
       <hr />
-      {tasksData.length > 0 ? (
-        <Tasks tasks={tasksData} onDeleteTask={deleteTask} onToggleTask={toggleTask} />
-      ) : (
-        "Empty Task"
-      )}
+      {tasksData ? <Tasks tasks={tasksData} onDeleteTask={deleteTask} onToggleTask={toggleTask} /> : "Empty Task"}
       <hr />
       <Footer />
     </div>
