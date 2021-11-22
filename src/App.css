@@ -35,3 +35,7 @@
 .task-box.reminder {
     border-bottom: 5px solid #0eb100;
 }
+
+.ant-row.ant-form-item {
+  justify-content: center;
+}

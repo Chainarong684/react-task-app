@@ -1,7 +1,7 @@
 let TasksDB = require("../models/TasksModel");
 
 /* ------------------------------ Get all tasks ----------------------------- */
-const fetchAllTasks = (req, res) => {
+const getTasks = (req, res) => {
   try {
     TasksDB.find((err, data) => {
       if (err) {
@@ -13,12 +13,13 @@ const fetchAllTasks = (req, res) => {
 
       if (data.length === 0) {
         return res.status(200).json({
-          statis: "bad",
+          status: "bad",
           msg: "Empty Task",
         });
       } else {
-        // const fmDate = data.map((item) => {
-        //   return new Date(item.date).toLocaleDateString();
+        // data.map((item) => {
+        //   const fmDate = new Date(item.date).toLocaleDateString();
+        //   return fmDate
         // });
         return res.status(200).json({
           status: "good",
@@ -33,8 +34,8 @@ const fetchAllTasks = (req, res) => {
 
 /* ------------------------------- Create task ------------------------------ */
 const addTasks = (req, res) => {
-  const { name, detail, date, reminder } = req.body;
   try {
+    const { name, detail, date, reminder } = req.body;
     TasksDB.create(
       {
         name,
@@ -49,7 +50,6 @@ const addTasks = (req, res) => {
             err,
           });
         } else {
-          console.log(data);
           return res.status(200).json({
             status: "good",
             data,
@@ -61,5 +61,36 @@ const addTasks = (req, res) => {
     console.log(error);
   }
 };
+/* ------------------------------- Update Task ------------------------------ */
+const updateTask = (req, res) => {
+  try {
+    const { id } = req.params;
+    res.send(id);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-module.exports = { fetchAllTasks, addTasks };
+/* ------------------------------- Delete task ------------------------------ */
+const deleteTask = (req, res) => {
+  try {
+    const { id } = req.params;
+    TasksDB.findByIdAndDelete(id, (err, data) => {
+      if (err) {
+        return res.status(400).json({
+          status: "bad",
+          err,
+        });
+      } else {
+        return res.status(200).json({
+          status: "good",
+          data,
+        });
+      }
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = { getTasks, addTasks, updateTask, deleteTask };
