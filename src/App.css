@@ -28,12 +28,22 @@
   margin: 10px 0;
 }
 
+.task-data {
+  flex: 1;
+}
+
+.task-btn {
+  padding-left: 20px;
+  display: flex;
+  column-gap: 10px;
+}
+
 .task-box:hover {
   background-color: #ffe0c7;
 }
 
 .task-box.reminder {
-    border-bottom: 5px solid #0eb100;
+  border-bottom: 5px solid #0eb100;
 }
 
 .ant-row.ant-form-item {

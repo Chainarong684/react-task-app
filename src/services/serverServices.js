@@ -1,5 +1,6 @@
 import axios from "axios";
 
+// get all tasks
 export const fetchAllTasks = async () => {
   try {
     const Tasks = await axios.get("http://localhost:3001/api/v1/tasks");
@@ -10,6 +11,7 @@ export const fetchAllTasks = async () => {
   }
 };
 
+// create new task
 export const createTask = async (value) => {
   try {
     const insertTask = await axios.post("http://localhost:3001/api/v1/tasks", value);
@@ -20,10 +22,27 @@ export const createTask = async (value) => {
   }
 };
 
+// update task
+export const updateTask = async (id) => {
+  try {
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// delete task
 export const deleteTask = async (id) => {
   try {
-    const removeTask = await axios.delete(`http://localhost:3001/api/v1/tasks/${id}`);
-    return removeTask.data
+    await axios.delete(`http://localhost:3001/api/v1/tasks/${id}`);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// toggle task
+export const checkTask = async (id, value) => {
+  try {
+    await axios.put(`http://localhost:3001/api/v1/tasks/${id}`, { reminder: value });
   } catch (error) {
     console.log(error);
   }

@@ -5,7 +5,7 @@ import AddTask from "../components/AddTask";
 import Tasks from "../components/Tasks";
 import Footer from "../Layouts/Footer";
 
-import { fetchAllTasks, createTask, deleteTask } from "../services/serverServices";
+import { fetchAllTasks, createTask, deleteTask, checkTask } from "../services/serverServices";
 
 const Home = () => {
   const [tasksData, setTasksData] = useState([]);
@@ -35,8 +35,14 @@ const Home = () => {
     setTasksData(tasksData.filter((task) => task._id !== id));
   };
 
-  const toggleTask = (id) => {
+  const toggleTask = async (id, value) => {
+    const taskStatus = !value;
+    await checkTask(id, taskStatus);
     setTasksData(tasksData.map((task) => (task._id === id ? { ...task, reminder: !task.reminder } : task)));
+  };
+
+  const editTask = (id) => {
+    console.log(id);
   };
 
   return (
@@ -44,7 +50,11 @@ const Home = () => {
       <Header title="Chainarong" onToggleBtn={() => setShowAddTask(!showAddTask)} isToggled={showAddTask} />
       {showAddTask && <AddTask onAddTask={addTask} />}
       <hr />
-      {tasksData ? <Tasks tasks={tasksData} onDeleteTask={delTask} onToggleTask={toggleTask} /> : "Empty Task"}
+      {tasksData && tasksData.length > 0 ? (
+        <Tasks tasks={tasksData} onDeleteTask={delTask} onToggleTask={toggleTask} onEditTask={editTask} />
+      ) : (
+        "Empty Task"
+      )}
       <hr />
       <Footer />
     </div>
