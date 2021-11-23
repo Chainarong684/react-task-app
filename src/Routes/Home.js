@@ -10,6 +10,7 @@ import { fetchAllTasks, createTask, deleteTask, checkTask } from "../services/se
 const Home = () => {
   const [tasksData, setTasksData] = useState([]);
   const [showAddTask, setShowAddTask] = useState(false);
+  const [showEditTask, setShowEditTask] = useState(false);
 
   useEffect(() => {
     getTasks();
@@ -21,7 +22,6 @@ const Home = () => {
   };
 
   const addTask = async (task) => {
-    console.log("front", task);
     const newTask = await createTask(task);
     if (tasksData === undefined) {
       setTasksData([newTask]);
@@ -43,12 +43,14 @@ const Home = () => {
 
   const editTask = (id) => {
     console.log(id);
+    setShowEditTask(true);
   };
 
   return (
     <div className="home main">
       <Header title="Chainarong" onToggleBtn={() => setShowAddTask(!showAddTask)} isToggled={showAddTask} />
       {showAddTask && <AddTask onAddTask={addTask} />}
+      {showEditTask && <AddTask isEditTask={true} />}
       <hr />
       {tasksData && tasksData.length > 0 ? (
         <Tasks tasks={tasksData} onDeleteTask={delTask} onToggleTask={toggleTask} onEditTask={editTask} />
