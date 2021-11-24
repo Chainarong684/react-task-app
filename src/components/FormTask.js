@@ -21,7 +21,7 @@ const FormTask = ({ mode, onAddTask, onEditTask, handleCancelBtn }) => {
   };
 
   const addAction = (
-    <div className="add-task" style={{ marginTop: 30 }}>
+    <div className="add-task" style={customeForm}>
       <h3 style={{ textAlign: "center" }}>*** {mode} ***</h3>
       <Form
         form={form}
@@ -60,7 +60,7 @@ const FormTask = ({ mode, onAddTask, onEditTask, handleCancelBtn }) => {
   );
 
   const editAction = (
-    <div className="edit-task" style={{ marginTop: 30 }}>
+    <div className="edit-task" style={customeForm}>
       <h3 style={{ textAlign: "center" }}>*** {mode} ***</h3>
       <Form
         form={form}
@@ -110,6 +110,10 @@ const FormTask = ({ mode, onAddTask, onEditTask, handleCancelBtn }) => {
   };
 
   return <>{renderMode()}</>;
+};
+
+const customeForm = {
+  marginTop: "30px",
 };
 
 const customBtn = {
