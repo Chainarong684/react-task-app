@@ -10,7 +10,7 @@ const Header = ({ title, onToggleBtn, isToggled }) => {
   return (
     <div className="header-box">
       <h1>
-        <ProfileOutlined /> {title} Tasks list
+        <ProfileOutlined /> {title}
       </h1>
       {location.pathname === "/about" ? (
         <Button type="primary" style={customButton} onClick={onToggleBtn}>
@@ -30,7 +30,7 @@ const Header = ({ title, onToggleBtn, isToggled }) => {
 };
 
 Header.defaultProps = {
-  title: "CK",
+  title: "App-Task",
 };
 
 Header.propTypes = {

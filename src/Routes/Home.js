@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import Header from "../Layouts/Header";
-import AddTask from "../components/AddTask";
+import FormTask from "../components/FormTask";
 import Tasks from "../components/Tasks";
 import Footer from "../Layouts/Footer";
 
@@ -43,14 +43,14 @@ const Home = () => {
 
   const editTask = (id) => {
     console.log(id);
-    setShowEditTask(true);
+    setShowEditTask(!showEditTask);
   };
 
   return (
     <div className="home main">
-      <Header title="Chainarong" onToggleBtn={() => setShowAddTask(!showAddTask)} isToggled={showAddTask} />
-      {showAddTask && <AddTask onAddTask={addTask} />}
-      {showEditTask && <AddTask isEditTask={true} />}
+      <Header title="Tasks List" onToggleBtn={() => setShowAddTask(!showAddTask)} isToggled={showAddTask} />
+      {showAddTask && <FormTask onAddTask={addTask} />}
+      {showEditTask && <FormTask isEditTask={true} />}
       <hr />
       {tasksData && tasksData.length > 0 ? (
         <Tasks tasks={tasksData} onDeleteTask={delTask} onToggleTask={toggleTask} onEditTask={editTask} />
