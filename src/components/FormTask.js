@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { Form, Input, Button, Checkbox, DatePicker } from "antd";
 
-const FormTask = ({ mode, onAddTask, onCancelBtn }) => {
-  console.log(mode);
+const FormTask = ({ mode, onAddTask, onEditTask, handleCancelBtn }) => {
   const [form] = Form.useForm();
   const [name, setName] = useState("");
   const [detail, setDetail] = useState("");
@@ -10,13 +9,15 @@ const FormTask = ({ mode, onAddTask, onCancelBtn }) => {
   const [reminder, setReminder] = useState(false);
 
   const handleSubmitForm = () => {
-    const newTask = { name, detail, date, reminder };
-    onAddTask(newTask);
+    const newData = { name, detail, date, reminder };
+    onAddTask(newData);
     form.resetFields();
   };
 
   const handleEditForm = () => {
-    console.log("formEdit");
+    const editData = { name, detail, date, reminder };
+    console.log(editData);
+    form.resetFields();
   };
 
   const addAction = (
@@ -41,7 +42,6 @@ const FormTask = ({ mode, onAddTask, onCancelBtn }) => {
 
         <Form.Item label="Date" name="date">
           <DatePicker onChange={(e) => setDate(e)} style={{ width: "100%" }} />
-          {/* <Input type="date" placeholder="date" value={date} onChange={(e) => setDate(e.target.value)} /> */}
         </Form.Item>
 
         <Form.Item name="reminder" valuePropName="checked" wrapperCol={{ offset: 10 }}>
@@ -81,7 +81,6 @@ const FormTask = ({ mode, onAddTask, onCancelBtn }) => {
 
         <Form.Item label="Date" name="date">
           <DatePicker onChange={(e) => setDate(e)} style={{ width: "100%" }} />
-          {/* <Input type="date" placeholder="date" value={date} onChange={(e) => setDate(e.target.value)} /> */}
         </Form.Item>
 
         <Form.Item name="reminder" valuePropName="checked" wrapperCol={{ offset: 10 }}>
@@ -94,7 +93,7 @@ const FormTask = ({ mode, onAddTask, onCancelBtn }) => {
           <Button style={btn} type="primary" htmlType="submit" size="large">
             Edit
           </Button>
-          <Button style={btn} type="primary" danger htmlType="button" size="large" onClick={onCancelBtn}>
+          <Button style={btn} type="primary" danger htmlType="button" size="large" onClick={handleCancelBtn}>
             Cancel
           </Button>
         </Form.Item>
@@ -103,10 +102,10 @@ const FormTask = ({ mode, onAddTask, onCancelBtn }) => {
   );
 
   const renderMode = () => {
-    if (mode === 'Add Task') {
-      return addAction
+    if (mode === "Add Task") {
+      return addAction;
     } else {
-      return editAction
+      return editAction;
     }
   };
 
