@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { Form, Input, Button, Checkbox, DatePicker } from "antd";
 
-const FormTask = ({ onAddTask, onEditTask, onCancelBtn }) => {
-  console.log(onEditTask);
-
+const FormTask = ({ mode, onAddTask, onCancelBtn }) => {
+  console.log(mode);
   const [form] = Form.useForm();
   const [name, setName] = useState("");
   const [detail, setDetail] = useState("");
@@ -22,7 +21,7 @@ const FormTask = ({ onAddTask, onEditTask, onCancelBtn }) => {
 
   const addAction = (
     <div className="add-task" style={{ marginTop: 30 }}>
-      <h3 style={{ textAlign: "center" }}>*** Add Task ***</h3>
+      <h3 style={{ textAlign: "center" }}>*** {mode} ***</h3>
       <Form
         form={form}
         name="add-form"
@@ -62,7 +61,7 @@ const FormTask = ({ onAddTask, onEditTask, onCancelBtn }) => {
 
   const editAction = (
     <div className="edit-task" style={{ marginTop: 30 }}>
-      <h3 style={{ textAlign: "center" }}>*** Edit Task ***</h3>
+      <h3 style={{ textAlign: "center" }}>*** {mode} ***</h3>
       <Form
         form={form}
         name="add-form"
@@ -103,7 +102,15 @@ const FormTask = ({ onAddTask, onEditTask, onCancelBtn }) => {
     </div>
   );
 
-  return <>{onEditTask ? editAction : addAction}</>;
+  const renderMode = () => {
+    if (mode === 'Add Task') {
+      return addAction
+    } else {
+      return editAction
+    }
+  };
+
+  return <>{renderMode()}</>;
 };
 
 const customBtn = {
