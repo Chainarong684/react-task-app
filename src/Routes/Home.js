@@ -43,14 +43,14 @@ const Home = () => {
 
   const editTask = (id) => {
     console.log(id);
-    setShowEditTask(!showEditTask);
+    setShowEditTask(true);
   };
 
   return (
     <div className="home main">
       <Header title="Tasks List" onToggleBtn={() => setShowAddTask(!showAddTask)} isToggled={showAddTask} />
       {showAddTask && <FormTask onAddTask={addTask} />}
-      {showEditTask && <FormTask isEditTask={true} />}
+      {showEditTask && <FormTask onEditTask={true} onCancelBtn={() => setShowEditTask(false)} />}
       <hr />
       {tasksData && tasksData.length > 0 ? (
         <Tasks tasks={tasksData} onDeleteTask={delTask} onToggleTask={toggleTask} onEditTask={editTask} />

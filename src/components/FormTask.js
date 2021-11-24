@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Form, Input, Button, Checkbox, DatePicker } from "antd";
 
-const FormTask = ({ onAddTask, onEditTask }) => {
+const FormTask = ({ onAddTask, onEditTask, onCancelBtn }) => {
   console.log(onEditTask);
 
   const [form] = Form.useForm();
@@ -91,9 +91,12 @@ const FormTask = ({ onAddTask, onEditTask }) => {
           </Checkbox>
         </Form.Item>
 
-        <Form.Item wrapperCol={{ offset: 10 }}>
-          <Button type="primary" htmlType="submit" size="large">
-            Edit Task
+        <Form.Item style={customBtn}>
+          <Button style={btn} type="primary" htmlType="submit" size="large">
+            Edit
+          </Button>
+          <Button style={btn} type="primary" danger htmlType="button" size="large" onClick={onCancelBtn}>
+            Cancel
           </Button>
         </Form.Item>
       </Form>
@@ -101,6 +104,14 @@ const FormTask = ({ onAddTask, onEditTask }) => {
   );
 
   return <>{onEditTask ? editAction : addAction}</>;
+};
+
+const customBtn = {
+  textAlign: "center",
+};
+
+const btn = {
+  width: "100px",
 };
 
 export default FormTask;
