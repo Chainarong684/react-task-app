@@ -41,20 +41,25 @@ const Home = () => {
     setTasksData(tasksData.map((task) => (task._id === id ? { ...task, reminder: !task.reminder } : task)));
   };
 
-  const edit = (id) => {
+  const editTask = (id) => {
+    console.log(id);
     setShowEditTask(true);
   };
 
-  const editTask = () => {};
+  const onEditTask = (task) => {
+    console.log(task);
+  };
 
   return (
     <div className="home main">
       <Header title="Tasks List" onToggleBtn={() => setShowAddTask(!showAddTask)} isToggled={showAddTask} />
       {showAddTask && <FormTask mode="Add Task" onAddTask={addTask} />}
-      {showEditTask && <FormTask mode="Edit Task" onEditTask={edit} handleCancelBtn={() => setShowEditTask(false)} />}
+      {showEditTask && (
+        <FormTask mode="Edit Task" onEditTask={onEditTask} handleCancelBtn={() => setShowEditTask(false)} />
+      )}
       <hr />
       {tasksData && tasksData.length > 0 ? (
-        <Tasks tasks={tasksData} onDeleteTask={delTask} onToggleTask={toggleTask} onEditTask={edit} />
+        <Tasks tasks={tasksData} onDeleteTask={delTask} onToggleTask={toggleTask} editTask={editTask} />
       ) : (
         "Empty Task"
       )}
