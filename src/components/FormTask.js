@@ -14,11 +14,11 @@ const FormTask = ({ mode, onAddTask, onEditTask, handleCancelBtn, task }) => {
 
   const initEditForm = () => {
     if (mode === "Edit Task") {
-      const taskData = task[0];
-      setName(taskData.name);
-      setDetail(taskData.detail);
-      setDate(taskData.date);
-      setReminder(taskData.reminder);
+      const { name, detail, date, reminder } = task[0];
+      setName(name);
+      setDetail(detail);
+      setDate(date);
+      setReminder(reminder);
     }
   };
 
@@ -29,10 +29,10 @@ const FormTask = ({ mode, onAddTask, onEditTask, handleCancelBtn, task }) => {
   };
 
   const handleEditForm = () => {
-    const editData = { name, detail, date, reminder };
+    const { _id } = task[0];
+    const editData = { _id, name, detail, date, reminder };
     onEditTask(editData);
     form.resetFields();
-    console.log(editData);
   };
 
   const addAction = (

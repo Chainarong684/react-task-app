@@ -48,7 +48,9 @@ const Home = () => {
     setShowEditTask(true);
   };
 
-  const onEditTask = (editTask) => {};
+  const onEditTask = (editTask) => {
+    console.log(editTask);
+  };
 
   return (
     <div className="home main">
