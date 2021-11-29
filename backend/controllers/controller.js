@@ -65,7 +65,6 @@ const addTasks = (req, res) => {
 const updateTask = (req, res) => {
   try {
     const { id } = req.params;
-    console.log(req.body);
 
     TasksDB.findByIdAndUpdate(id, req.body, { new: true }, (err, data) => {
       if (err) {

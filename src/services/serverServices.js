@@ -23,9 +23,9 @@ export const createTask = async (value) => {
 };
 
 // update task
-export const updateTask = (value) => {
+export const updateTask = async (value) => {
   const { _id } = value;
-  axios.put(`http://localhost:3001/api/v1/tasks/${_id}`, value);
+  await axios.put(`http://localhost:3001/api/v1/tasks/${_id}`, value);
   try {
   } catch (error) {
     console.log(error);

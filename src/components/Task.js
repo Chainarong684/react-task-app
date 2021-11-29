@@ -2,7 +2,7 @@ import { FaTimes } from "react-icons/fa";
 import { FaEdit } from "react-icons/fa";
 import { CalendarOutlined } from "@ant-design/icons";
 
-const Task = ({ task, onDeleteTask, onToggleTask, editTask }) => {
+const Task = ({ task, onDeleteTask, onToggleTask, onEditTask }) => {
   return (
     <div
       className={`task-box ${task.reminder ? "reminder" : ""}`}
@@ -21,7 +21,7 @@ const Task = ({ task, onDeleteTask, onToggleTask, editTask }) => {
         )}
       </div>
       <div className="task-btn">
-        <FaEdit style={editStyle} onClick={() => editTask(task._id)} />
+        <FaEdit style={editStyle} onClick={() => onEditTask(task._id)} />
         <FaTimes style={timeStyle} onClick={() => onDeleteTask(task._id)} />
       </div>
     </div>

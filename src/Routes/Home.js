@@ -36,19 +36,19 @@ const Home = () => {
     setTasksData(tasksData.filter((task) => task._id !== id));
   };
 
-  const toggleTask = async (id, value) => {
+  const toggleTask = (id, value) => {
     const taskStatus = !value;
-    await checkTask(id, taskStatus);
+    checkTask(id, taskStatus);
     setTasksData(tasksData.map((task) => (task._id === id ? { ...task, reminder: !task.reminder } : task)));
+  };
+
+  const onUpdateTask = (editTask) => {
+    updateTask(editTask);
   };
 
   const editTask = (id) => {
     setTask(tasksData.filter((task) => task._id === id));
     setShowEditTask(true);
-  };
-
-  const onUpdateTask = (editTask) => {
-    updateTask(editTask);
   };
 
   return (
@@ -65,7 +65,7 @@ const Home = () => {
       )}
       <hr />
       {tasksData && tasksData.length > 0 ? (
-        <Tasks tasks={tasksData} onDeleteTask={delTask} task={task} onToggleTask={toggleTask} editTask={editTask} />
+        <Tasks tasks={tasksData} onDeleteTask={delTask} task={task} onToggleTask={toggleTask} onEditTask={editTask} />
       ) : (
         "Empty Task"
       )}
