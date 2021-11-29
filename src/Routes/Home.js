@@ -9,6 +9,7 @@ import { fetchAllTasks, createTask, deleteTask, checkTask } from "../services/se
 
 const Home = () => {
   const [tasksData, setTasksData] = useState([]);
+  const [task, setTask] = useState("");
   const [showAddTask, setShowAddTask] = useState(false);
   const [showEditTask, setShowEditTask] = useState(false);
 
@@ -43,23 +44,22 @@ const Home = () => {
 
   const editTask = (id) => {
     console.log(id);
+    setTask(tasksData.filter((task) => task._id === id));
     setShowEditTask(true);
   };
 
-  const onEditTask = (task) => {
-    console.log(task);
-  };
+  const onEditTask = (editTask) => {};
 
   return (
     <div className="home main">
       <Header title="Tasks List" onToggleBtn={() => setShowAddTask(!showAddTask)} isToggled={showAddTask} />
       {showAddTask && <FormTask mode="Add Task" onAddTask={addTask} />}
       {showEditTask && (
-        <FormTask mode="Edit Task" onEditTask={onEditTask} handleCancelBtn={() => setShowEditTask(false)} />
+        <FormTask mode="Edit Task" onEditTask={onEditTask} task={task} handleCancelBtn={() => setShowEditTask(false)} />
       )}
       <hr />
       {tasksData && tasksData.length > 0 ? (
-        <Tasks tasks={tasksData} onDeleteTask={delTask} onToggleTask={toggleTask} editTask={editTask} />
+        <Tasks tasks={tasksData} onDeleteTask={delTask} task={task} onToggleTask={toggleTask} editTask={editTask} />
       ) : (
         "Empty Task"
       )}

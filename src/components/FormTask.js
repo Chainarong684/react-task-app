@@ -1,12 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Form, Input, Button, Checkbox, DatePicker } from "antd";
 
-const FormTask = ({ mode, onAddTask, onEditTask, handleCancelBtn }) => {
+const FormTask = ({ mode, onAddTask, onEditTask, handleCancelBtn, task }) => {
   const [form] = Form.useForm();
   const [name, setName] = useState("");
   const [detail, setDetail] = useState("");
   const [date, setDate] = useState(Date.now());
   const [reminder, setReminder] = useState(false);
+
+  useEffect(() => {
+    initEditForm();
+  }, [task]);
+
+  const initEditForm = () => {
+    if (mode === "Edit Task") {
+      const taskData = task[0];
+      setName(taskData.name);
+      setDetail(taskData.detail);
+      setDate(taskData.date);
+      setReminder(taskData.reminder);
+    }
+  };
 
   const handleSubmitForm = () => {
     const newData = { name, detail, date, reminder };
@@ -16,8 +30,9 @@ const FormTask = ({ mode, onAddTask, onEditTask, handleCancelBtn }) => {
 
   const handleEditForm = () => {
     const editData = { name, detail, date, reminder };
-    console.log(editData);
+    onEditTask(editData);
     form.resetFields();
+    console.log(editData);
   };
 
   const addAction = (
@@ -64,14 +79,14 @@ const FormTask = ({ mode, onAddTask, onEditTask, handleCancelBtn }) => {
       <h3 style={{ textAlign: "center" }}>*** {mode} ***</h3>
       <Form
         form={form}
-        name="add-form"
+        name="edit-form"
         labelCol={{ span: 4 }}
         wrapperCol={{ span: 16 }}
         autoComplete="off"
         scrollToFirstError
         onFinish={handleEditForm}
       >
-        <Form.Item label="Task name" name="task" rules={[{ required: true, message: "Please input task name !" }]}>
+        <Form.Item label="Task name" name="task">
           <Input placeholder="Task name" value={name} onChange={(e) => setName(e.target.value)} />
         </Form.Item>
 
