@@ -15,7 +15,7 @@ const Home = () => {
 
   useEffect(() => {
     getTasks();
-  }, []);
+  }, [tasksData]);
 
   const getTasks = async () => {
     const result = await fetchAllTasks();
@@ -29,26 +29,32 @@ const Home = () => {
     } else {
       setTasksData([...tasksData, newTask]);
     }
+    setShowAddTask(false);
   };
 
   const delTask = async (id) => {
     await deleteTask(id);
-    setTasksData(tasksData.filter((task) => task._id !== id));
+    // setTasksData(tasksData.filter((task) => task._id !== id));
   };
 
   const toggleTask = (id, value) => {
     const taskStatus = !value;
     checkTask(id, taskStatus);
-    setTasksData(tasksData.map((task) => (task._id === id ? { ...task, reminder: !task.reminder } : task)));
+    // setTasksData(tasksData.map((task) => (task._id === id ? { ...task, reminder: !task.reminder } : task)));
   };
 
   const onUpdateTask = (editTask) => {
     updateTask(editTask);
+    setShowEditTask(false);
   };
 
   const editTask = (id) => {
+    if (showEditTask) {
+      setShowEditTask(false);
+    } else {
+      setShowEditTask(true);
+    }
     setTask(tasksData.filter((task) => task._id === id));
-    setShowEditTask(true);
   };
 
   return (
