@@ -66,8 +66,8 @@ const updateTask = (req, res) => {
   try {
     const { id } = req.params;
     console.log(req.body);
-    const { name, detail, date, reminder } = req.body;
-    let query = {};
+    // const { name, detail, date, reminder } = req.body;
+    // let query = {};
 
     TasksDB.findByIdAndUpdate(id, req.body, { new: true }, (err, data) => {
       if (err) {

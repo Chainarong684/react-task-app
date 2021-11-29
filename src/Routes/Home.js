@@ -5,7 +5,7 @@ import FormTask from "../components/FormTask";
 import Tasks from "../components/Tasks";
 import Footer from "../Layouts/Footer";
 
-import { fetchAllTasks, createTask, deleteTask, checkTask } from "../services/serverServices";
+import { fetchAllTasks, createTask, deleteTask, checkTask, updateTask } from "../services/serverServices";
 
 const Home = () => {
   const [tasksData, setTasksData] = useState([]);
@@ -43,13 +43,12 @@ const Home = () => {
   };
 
   const editTask = (id) => {
-    console.log(id);
     setTask(tasksData.filter((task) => task._id === id));
     setShowEditTask(true);
   };
 
-  const onEditTask = (editTask) => {
-    console.log(editTask);
+  const onUpdateTask = (editTask) => {
+    updateTask(editTask);
   };
 
   return (
@@ -57,7 +56,12 @@ const Home = () => {
       <Header title="Tasks List" onToggleBtn={() => setShowAddTask(!showAddTask)} isToggled={showAddTask} />
       {showAddTask && <FormTask mode="Add Task" onAddTask={addTask} />}
       {showEditTask && (
-        <FormTask mode="Edit Task" onEditTask={onEditTask} task={task} handleCancelBtn={() => setShowEditTask(false)} />
+        <FormTask
+          mode="Edit Task"
+          onUpdateTask={onUpdateTask}
+          task={task}
+          handleCancelBtn={() => setShowEditTask(false)}
+        />
       )}
       <hr />
       {tasksData && tasksData.length > 0 ? (

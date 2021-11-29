@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Form, Input, Button, Checkbox, DatePicker } from "antd";
 
-const FormTask = ({ mode, onAddTask, onEditTask, handleCancelBtn, task }) => {
+const FormTask = ({ mode, onAddTask, onUpdateTask, handleCancelBtn, task }) => {
   const [form] = Form.useForm();
   const [name, setName] = useState("");
   const [detail, setDetail] = useState("");
@@ -9,10 +9,7 @@ const FormTask = ({ mode, onAddTask, onEditTask, handleCancelBtn, task }) => {
   const [reminder, setReminder] = useState(false);
 
   useEffect(() => {
-    initEditForm();
-  }, [task]);
-
-  const initEditForm = () => {
+    // initEditForm();
     if (mode === "Edit Task") {
       const { name, detail, date, reminder } = task[0];
       setName(name);
@@ -20,7 +17,17 @@ const FormTask = ({ mode, onAddTask, onEditTask, handleCancelBtn, task }) => {
       setDate(date);
       setReminder(reminder);
     }
-  };
+  }, [mode, task]);
+
+  // const initEditForm = () => {
+  //   if (mode === "Edit Task") {
+  //     const { name, detail, date, reminder } = task[0];
+  //     setName(name);
+  //     setDetail(detail);
+  //     setDate(date);
+  //     setReminder(reminder);
+  //   }
+  // };
 
   const handleSubmitForm = () => {
     const newData = { name, detail, date, reminder };
@@ -31,7 +38,7 @@ const FormTask = ({ mode, onAddTask, onEditTask, handleCancelBtn, task }) => {
   const handleEditForm = () => {
     const { _id } = task[0];
     const editData = { _id, name, detail, date, reminder };
-    onEditTask(editData);
+    onUpdateTask(editData);
     form.resetFields();
   };
 
